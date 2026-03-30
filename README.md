@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Mini ERP - College Management System
 
 A complete Java desktop ERP application for college management built with:
@@ -102,3 +103,6 @@ Demo data is seeded automatically including courses, subjects, students, faculty
 - On first run the database is created automatically — no manual setup needed
 - The database file is stored next to the JAR: `resources/database/erp.db`
 - FlatLaf requires Java 11+; tested with OpenJDK 11, 17, 21
+=======
+# MiniERP
+>>>>>>> f34b075d07d2e9a8f8535080ebac6d42d167a52c
