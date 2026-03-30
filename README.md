@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Mini ERP - College Management System
 
 A complete Java desktop ERP application for college management built with:
