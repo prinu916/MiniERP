@@ -10,12 +10,17 @@ public class FacultyDAO {
 
     public List<Faculty> findAll() {
         List<Map<String, Object>> rows = QueryExecutor.executeQuery(
+<<<<<<< HEAD
                 "SELECT * FROM faculty ORDER BY name");
+=======
+            "SELECT * FROM faculty ORDER BY name");
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         List<Faculty> list = new ArrayList<>();
         for (Map<String, Object> row : rows) list.add(map(row));
         return list;
     }
 
+<<<<<<< HEAD
     // --- ADDED: The save method your UI is looking for ---
     public boolean save(Faculty f) {
         try {
@@ -47,17 +52,27 @@ public class FacultyDAO {
     public Faculty findById(int id) {
         List<Map<String, Object>> rows = QueryExecutor.executeQuery(
                 "SELECT * FROM faculty WHERE id = ?", id);
+=======
+    public Faculty findById(int id) {
+        List<Map<String, Object>> rows = QueryExecutor.executeQuery(
+            "SELECT * FROM faculty WHERE id = ?", id);
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         return rows.isEmpty() ? null : map(rows.get(0));
     }
 
     public Faculty findByUserId(int userId) {
         List<Map<String, Object>> rows = QueryExecutor.executeQuery(
+<<<<<<< HEAD
                 "SELECT * FROM faculty WHERE user_id = ?", userId);
+=======
+            "SELECT * FROM faculty WHERE user_id = ?", userId);
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         return rows.isEmpty() ? null : map(rows.get(0));
     }
 
     public long insert(Faculty f, String username, String password) {
         long userId = QueryExecutor.executeInsert(
+<<<<<<< HEAD
                 "INSERT INTO users (username, password, role) VALUES (?, ?, 'FACULTY')",
                 username, password);
         if (userId < 0) return -1;
@@ -65,13 +80,28 @@ public class FacultyDAO {
                 "INSERT INTO faculty (user_id, faculty_id, name, email, phone, department, designation, specialization) VALUES (?,?,?,?,?,?,?,?)",
                 userId, f.getFacultyId(), f.getName(), f.getEmail(), f.getPhone(),
                 f.getDepartment(), f.getDesignation(), f.getSpecialization());
+=======
+            "INSERT INTO users (username, password, role) VALUES (?, ?, 'FACULTY')",
+            username, password);
+        if (userId < 0) return -1;
+        return QueryExecutor.executeInsert(
+            "INSERT INTO faculty (user_id, faculty_id, name, email, phone, department, designation, specialization) VALUES (?,?,?,?,?,?,?,?)",
+            userId, f.getFacultyId(), f.getName(), f.getEmail(), f.getPhone(),
+            f.getDepartment(), f.getDesignation(), f.getSpecialization());
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
     }
 
     public int update(Faculty f) {
         return QueryExecutor.executeUpdate(
+<<<<<<< HEAD
                 "UPDATE faculty SET name=?, email=?, phone=?, department=?, designation=?, specialization=? WHERE id=?",
                 f.getName(), f.getEmail(), f.getPhone(), f.getDepartment(),
                 f.getDesignation(), f.getSpecialization(), f.getId());
+=======
+            "UPDATE faculty SET name=?, email=?, phone=?, department=?, designation=?, specialization=? WHERE id=?",
+            f.getName(), f.getEmail(), f.getPhone(), f.getDepartment(),
+            f.getDesignation(), f.getSpecialization(), f.getId());
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
     }
 
     public int count() {

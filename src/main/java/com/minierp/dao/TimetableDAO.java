@@ -1,11 +1,17 @@
 package com.minierp.dao;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.minierp.database.QueryExecutor;
 import com.minierp.models.Timetable;
+=======
+import com.minierp.database.QueryExecutor;
+import com.minierp.models.Timetable;
+import java.util.*;
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
 public class TimetableDAO {
 
@@ -28,6 +34,7 @@ public class TimetableDAO {
         return mapList(rows);
     }
 
+<<<<<<< HEAD
     public List<Timetable> findByFacultyId(int facultyId) {
         List<Map<String, Object>> rows = QueryExecutor.executeQuery(
             "SELECT t.*, sub.name AS subject_name, f.name AS faculty_name, c.name AS course_name " +
@@ -38,6 +45,8 @@ public class TimetableDAO {
         return mapList(rows);
     }
 
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
     public long insert(Timetable t) {
         return QueryExecutor.executeInsert(
             "INSERT INTO timetable (subject_id, faculty_id, day_of_week, start_time, end_time, room, semester, course_id) VALUES (?,?,?,?,?,?,?,?)",

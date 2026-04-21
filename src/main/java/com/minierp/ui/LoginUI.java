@@ -32,8 +32,12 @@ public class LoginUI extends JFrame {
 
         // Left Panel - Branding
         JPanel left = new JPanel() {
+<<<<<<< HEAD
             @Override
             protected void paintComponent(Graphics g) {
+=======
+            @Override protected void paintComponent(Graphics g) {
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -114,8 +118,13 @@ public class LoginUI extends JFrame {
         passField.setCaretColor(UITheme.TEXT_PRIMARY);
         passField.setFont(UITheme.FONT_BODY);
         passField.setBorder(BorderFactory.createCompoundBorder(
+<<<<<<< HEAD
                 BorderFactory.createLineBorder(UITheme.BORDER),
                 BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+=======
+            BorderFactory.createLineBorder(UITheme.BORDER),
+            BorderFactory.createEmptyBorder(6, 10, 6, 10)));
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         passField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 42));
         passField.setText("faculty123");
 
@@ -143,10 +152,14 @@ public class LoginUI extends JFrame {
 
         loginBtn.addActionListener(e -> doLogin());
         passField.addKeyListener(new KeyAdapter() {
+<<<<<<< HEAD
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) doLogin();
             }
+=======
+            @Override public void keyPressed(KeyEvent e) { if (e.getKeyCode() == KeyEvent.VK_ENTER) doLogin(); }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         });
 
         form.add(loginTitle);
@@ -188,6 +201,7 @@ public class LoginUI extends JFrame {
         statusLabel.setForeground(UITheme.TEXT_MUTED);
 
         SwingWorker<Boolean, Void> worker = new SwingWorker<>() {
+<<<<<<< HEAD
             @Override
             protected Boolean doInBackground() {
                 return controller.login(user, pass);
@@ -214,6 +228,20 @@ public class LoginUI extends JFrame {
                         }
                         // ---------------------------
 
+=======
+            @Override protected Boolean doInBackground() { return controller.login(user, pass); }
+            @Override protected void done() {
+                try {
+                    boolean success = get();
+                    if (success) {
+                        dispose();
+                        String role = AuthService.getInstance().getCurrentRole();
+                        if ("FACULTY".equals(role) || "ADMIN".equals(role)) {
+                            new FacultyDashboardUI().setVisible(true);
+                        } else {
+                            new StudentDashboardUI().setVisible(true);
+                        }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
                     } else {
                         statusLabel.setText("Invalid username or password.");
                         statusLabel.setForeground(UITheme.DANGER);
@@ -221,10 +249,17 @@ public class LoginUI extends JFrame {
                     }
                 } catch (Exception ex) {
                     statusLabel.setText("Error: " + ex.getMessage());
+<<<<<<< HEAD
                     ex.printStackTrace();
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
                 }
             }
         };
         worker.execute();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb

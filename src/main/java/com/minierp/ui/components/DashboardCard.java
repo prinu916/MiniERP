@@ -10,14 +10,22 @@ public class DashboardCard extends JPanel {
         setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(accentColor, 2),
             BorderFactory.createEmptyBorder(18, 20, 18, 20)));
+<<<<<<< HEAD
         setPreferredSize(new Dimension(200, 130));
+=======
+        setPreferredSize(new Dimension(200, 100));
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
         JLabel titleLbl = new JLabel(title);
         titleLbl.setFont(UITheme.FONT_SMALL.deriveFont(Font.BOLD));
         titleLbl.setForeground(UITheme.TEXT_MUTED);
 
         JLabel valueLbl = new JLabel(value);
+<<<<<<< HEAD
         valueLbl.setFont(new Font("Segoe UI", Font.BOLD, 30));
+=======
+        valueLbl.setFont(new Font("Segoe UI", Font.BOLD, 32));
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         valueLbl.setForeground(accentColor);
 
         JLabel subLbl = new JLabel(subtitle);

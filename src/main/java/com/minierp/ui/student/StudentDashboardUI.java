@@ -47,6 +47,7 @@ public class StudentDashboardUI extends JFrame {
         sidebar.addNavItem("🔍", "Lost & Found", "lostfound");
         sidebar.setOnNavigate(this::navigateTo);
 
+<<<<<<< HEAD
         // Logo + Title Header
         JPanel logoHeader = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         logoHeader.setOpaque(false);
@@ -59,6 +60,8 @@ public class StudentDashboardUI extends JFrame {
         logoHeader.add(logoLabel);
         logoHeader.add(titleLabel);
         
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         navbar = new Navbar("Student Dashboard",
             () -> notifService.getUnreadCount("STUDENT"));
 

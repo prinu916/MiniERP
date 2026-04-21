@@ -1,5 +1,6 @@
 package com.minierp.ui.faculty;
 
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
@@ -25,6 +26,19 @@ import com.minierp.models.Exam;
 import com.minierp.services.AuthService;
 import com.minierp.ui.components.UITheme;
 import com.minierp.ui.components.UIUtils;
+=======
+import com.minierp.ui.components.UITheme;
+import com.minierp.controllers.ExamController;
+import com.minierp.services.AuthService;
+import com.minierp.models.Exam;
+import com.minierp.database.QueryExecutor;
+
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
 public class ExamSchedulerUI extends JPanel {
     private final ExamController ctrl = new ExamController();
@@ -56,9 +70,12 @@ public class ExamSchedulerUI extends JPanel {
 
         topBar.add(addBtn); topBar.add(aiBtn); topBar.add(delBtn); topBar.add(refreshBtn);
 
+<<<<<<< HEAD
         // RBAC: Hide CRUD for faculty
         UIUtils.setAdminOnly(addBtn, aiBtn, delBtn);
 
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         model = new DefaultTableModel(COLS, 0) {
             @Override public boolean isCellEditable(int r, int c) { return false; }
         };
@@ -72,6 +89,7 @@ public class ExamSchedulerUI extends JPanel {
 
     private void loadData() {
         model.setRowCount(0);
+<<<<<<< HEAD
         AuthService auth = AuthService.getInstance();
         List<Exam> exams;
         if (com.minierp.ui.components.UIUtils.isAdmin()) {
@@ -84,6 +102,9 @@ public class ExamSchedulerUI extends JPanel {
                 .collect(java.util.stream.Collectors.toList());
         }
         for (Exam e : exams) {
+=======
+        for (Exam e : ctrl.getAll()) {
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
             model.addRow(new Object[]{e.getId(), e.getTitle(), e.getSubjectName(),
                 e.getExamType(), e.getExamDate(), e.getStartTime()+"-"+e.getEndTime(), e.getVenue(), e.getMaxMarks()});
         }
@@ -120,12 +141,16 @@ public class ExamSchedulerUI extends JPanel {
         int sem = Integer.parseInt(semField.getText().trim());
         String type = (String) typeCombo.getSelectedItem();
         String startDate = dateField.getText().trim();
+<<<<<<< HEAD
         AuthService auth = AuthService.getInstance();
         if (!com.minierp.ui.components.UIUtils.isAdmin()) {
             JOptionPane.showMessageDialog(this, "Faculty cannot create exams directly. Use AI Scheduler.");
             return;
         }
         int facultyId = auth.getCurrentFaculty() != null ? auth.getCurrentFaculty().getId() : 1;
+=======
+        int facultyId = AuthService.getInstance().getCurrentFaculty() != null ? AuthService.getInstance().getCurrentFaculty().getId() : 1;
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
         List<Exam> generated = ctrl.generateSchedule(courseId, sem, type, startDate, facultyId);
         if (generated.isEmpty()) { JOptionPane.showMessageDialog(this, "No subjects found."); return; }

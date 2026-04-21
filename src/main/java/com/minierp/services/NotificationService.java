@@ -9,6 +9,7 @@ public class NotificationService {
 
     public List<Notification> getAll() { return dao.findAll(); }
     public List<Notification> getByRole(String role) { return dao.findByRole(role); }
+<<<<<<< HEAD
     public boolean send(Notification n) { 
         if (!AuthService.getInstance().isAdmin() && !"ADMIN".equals(AuthService.getInstance().getCurrentRole())) {
             throw new SecurityException("Admin only for sending notifications");
@@ -21,4 +22,10 @@ public class NotificationService {
         if (!AuthService.getInstance().isAdmin()) throw new SecurityException("Admin only");
         return dao.delete(id) > 0; 
     }
+=======
+    public boolean send(Notification n) { return dao.insert(n) > 0; }
+    public void markRead(int id) { dao.markRead(id); }
+    public int getUnreadCount(String role) { return dao.countUnread(role); }
+    public boolean delete(int id) { return dao.delete(id) > 0; }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 }

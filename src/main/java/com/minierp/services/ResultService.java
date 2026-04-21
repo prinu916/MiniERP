@@ -13,23 +13,30 @@ public class ResultService {
     public List<Result> getByExam(int examId) { return dao.findByExam(examId); }
 
     public boolean addResult(Result r) {
+<<<<<<< HEAD
         AuthService auth = AuthService.getInstance();
         if (!auth.isAdmin() && r.getEnteredBy() != auth.getCurrentUserId()) {
             throw new SecurityException("Can only manage own results");
         }
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         r.setGrade(calculateGrade(r.getMarksObtained(), r.getMaxMarks()));
         return dao.insert(r) > 0;
     }
 
     public boolean updateResult(Result r) {
+<<<<<<< HEAD
         AuthService auth = AuthService.getInstance();
         if (!auth.isAdmin() && r.getEnteredBy() != auth.getCurrentUserId()) {
             throw new SecurityException("Can only manage own results");
         }
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         r.setGrade(calculateGrade(r.getMarksObtained(), r.getMaxMarks()));
         return dao.update(r) > 0;
     }
 
+<<<<<<< HEAD
     public boolean deleteResult(int id) { 
         AuthService auth = AuthService.getInstance();
         if (!auth.isAdmin()) {
@@ -38,6 +45,9 @@ public class ResultService {
         }
         return dao.delete(id) > 0; 
     }
+=======
+    public boolean deleteResult(int id) { return dao.delete(id) > 0; }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
     public String calculateGrade(double marks, int maxMarks) {
         if (maxMarks <= 0) return Constants.GRADE_F;

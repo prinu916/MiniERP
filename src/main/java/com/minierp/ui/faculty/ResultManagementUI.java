@@ -10,6 +10,7 @@ import com.minierp.dao.StudentDAO;
 import com.minierp.models.Student;
 
 import javax.swing.*;
+<<<<<<< HEAD
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -21,25 +22,44 @@ public class ResultManagementUI extends JPanel {
     private final ResultService resultService = new ResultService();
     private final StudentDAO studentDAO = new StudentDAO();
 
+=======
+import javax.swing.table.*;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+
+public class ResultManagementUI extends JPanel {
+    private final ExamController examCtrl = new ExamController();
+    private final ResultService resultService = new ResultService();
+    private final StudentDAO studentDAO = new StudentDAO();
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
     private JTable table;
     private DefaultTableModel model;
     private JComboBox<String> examCombo;
     private int currentExamId = 0;
 
+<<<<<<< HEAD
     private static final String[] COLS = {
             "Student", "Exam", "Subject", "Marks", "Max", "Grade", "Entered At"
     };
+=======
+    private static final String[] COLS = {"Student", "Exam", "Subject", "Marks", "Max", "Grade", "Entered At"};
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
     public ResultManagementUI() {
         setLayout(new BorderLayout(0, 12));
         setBackground(UITheme.BG_DARK);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         initUI();
         loadData(0);
     }
 
     private void initUI() {
+<<<<<<< HEAD
 
         JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
         topBar.setOpaque(false);
@@ -82,6 +102,20 @@ public class ResultManagementUI extends JPanel {
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(this, "Invalid exam selection.");
                 }
+=======
+        JPanel topBar = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        topBar.setOpaque(false);
+
+        List<Exam> exams = examCtrl.getAll();
+        String[] examOpts = exams.stream().map(e -> e.getId() + ": " + e.getTitle()).toArray(String[]::new);
+        examCombo = UITheme.makeCombo(examOpts.length > 0 ? examOpts : new String[]{"No exams"});
+        examCombo.setPreferredSize(new Dimension(280, 36));
+        examCombo.addActionListener(e -> {
+            String s = (String) examCombo.getSelectedItem();
+            if (s != null && !s.startsWith("No")) {
+                currentExamId = Integer.parseInt(s.split(":")[0].trim());
+                loadData(currentExamId);
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
             }
         });
 
@@ -97,11 +131,16 @@ public class ResultManagementUI extends JPanel {
         topBar.add(refreshBtn);
 
         model = new DefaultTableModel(COLS, 0) {
+<<<<<<< HEAD
             public boolean isCellEditable(int r, int c) {
                 return false;
             }
         };
 
+=======
+            @Override public boolean isCellEditable(int r, int c) { return false; }
+        };
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         table = UITheme.makeTable(model);
         JScrollPane scroll = UITheme.makeScrollPane(table);
 
@@ -110,6 +149,7 @@ public class ResultManagementUI extends JPanel {
     }
 
     private void loadData(int examId) {
+<<<<<<< HEAD
 
         model.setRowCount(0);
         AuthService auth = AuthService.getInstance();
@@ -151,17 +191,29 @@ public class ResultManagementUI extends JPanel {
                     r.getGrade(),
                     r.getEnteredAt()
             });
+=======
+        model.setRowCount(0);
+        List<Result> results = examId > 0 ? examCtrl.getResultsByExam(examId) : resultService.getAllResults();
+        for (Result r : results) {
+            model.addRow(new Object[]{r.getStudentName(), r.getExamTitle(), r.getSubjectName(),
+                r.getMarksObtained(), r.getMaxMarks(), r.getGrade(), r.getEnteredAt()});
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         }
     }
 
     private void showAddResultDialog() {
+<<<<<<< HEAD
 
         String selExam = (String) examCombo.getSelectedItem();
 
+=======
+        String selExam = (String) examCombo.getSelectedItem();
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         if (selExam == null || selExam.startsWith("No")) {
             JOptionPane.showMessageDialog(this, "Select an exam first.");
             return;
         }
+<<<<<<< HEAD
 
         int examId = Integer.parseInt(selExam.split(":")[0].trim());
 
@@ -182,6 +234,14 @@ public class ResultManagementUI extends JPanel {
         );
 
         dialog.setSize(420, 320);
+=======
+        int examId = Integer.parseInt(selExam.split(":")[0].trim());
+        Exam exam = examCtrl.getAll().stream().filter(e -> e.getId() == examId).findFirst().orElse(null);
+        if (exam == null) return;
+
+        JDialog dialog = new JDialog(SwingUtilities.getWindowAncestor(this), "Add Result", Dialog.ModalityType.APPLICATION_MODAL);
+        dialog.setSize(420, 300);
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         dialog.setLocationRelativeTo(this);
         dialog.getContentPane().setBackground(UITheme.BG_DARK);
 
@@ -190,6 +250,7 @@ public class ResultManagementUI extends JPanel {
         panel.setBorder(BorderFactory.createEmptyBorder(20, 24, 20, 24));
 
         List<Student> students = studentDAO.findAll();
+<<<<<<< HEAD
 
         if (students.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No students found.");
@@ -240,12 +301,36 @@ public class ResultManagementUI extends JPanel {
                     return;
                 }
 
+=======
+        String[] stuOpts = students.stream().map(s -> s.getId() + ": " + s.getName()).toArray(String[]::new);
+        JComboBox<String> stuCombo = UITheme.makeCombo(stuOpts.length > 0 ? stuOpts : new String[]{"No students"});
+        JTextField marksField = UITheme.makeTextField();
+        JTextField remarksField = UITheme.makeTextField();
+
+        panel.add(UITheme.makeLabel("Student*", UITheme.FONT_BODY, UITheme.TEXT_MUTED)); panel.add(stuCombo);
+        panel.add(UITheme.makeLabel("Marks Obtained* (Max: " + exam.getMaxMarks() + ")", UITheme.FONT_BODY, UITheme.TEXT_MUTED));
+        panel.add(marksField);
+        panel.add(UITheme.makeLabel("Remarks", UITheme.FONT_BODY, UITheme.TEXT_MUTED)); panel.add(remarksField);
+
+        JButton saveBtn = UITheme.makeAccentButton("Save");
+        saveBtn.addActionListener(e -> {
+            String ss = (String) stuCombo.getSelectedItem();
+            if (ss == null || marksField.getText().isBlank()) return;
+            try {
+                int stuId = Integer.parseInt(ss.split(":")[0].trim());
+                double marks = Double.parseDouble(marksField.getText().trim());
+                if (marks < 0 || marks > exam.getMaxMarks()) {
+                    JOptionPane.showMessageDialog(dialog, "Marks must be 0-" + exam.getMaxMarks());
+                    return;
+                }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
                 Result r = new Result();
                 r.setStudentId(stuId);
                 r.setExamId(examId);
                 r.setMarksObtained(marks);
                 r.setMaxMarks(exam.getMaxMarks());
                 r.setRemarks(remarksField.getText().trim());
+<<<<<<< HEAD
 
                 int facId = (AuthService.getInstance().getCurrentFaculty() != null)
                         ? AuthService.getInstance().getCurrentFaculty().getId()
@@ -271,18 +356,38 @@ public class ResultManagementUI extends JPanel {
                         "Something went wrong: " + ex.getMessage(),
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+=======
+                int facId = AuthService.getInstance().getCurrentFaculty() != null ? AuthService.getInstance().getCurrentFaculty().getId() : 1;
+                r.setEnteredBy(facId);
+                resultService.addResult(r);
+                dialog.dispose();
+                loadData(examId);
+                JOptionPane.showMessageDialog(this, "Result saved! Grade: " + r.getGrade());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(dialog, "Invalid marks value.", "Error", JOptionPane.ERROR_MESSAGE);
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
             }
         });
 
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         footer.setBackground(UITheme.BG_DARK);
+<<<<<<< HEAD
         footer.add(cancelBtn);
+=======
+        footer.add(UITheme.makeButton("Cancel", UITheme.BG_CARD));
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         footer.add(saveBtn);
 
         dialog.setLayout(new BorderLayout());
         dialog.add(panel, BorderLayout.CENTER);
         dialog.add(footer, BorderLayout.SOUTH);
+<<<<<<< HEAD
 
         dialog.setVisible(true);
     }
 }
+=======
+        dialog.setVisible(true);
+    }
+}
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb

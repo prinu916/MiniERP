@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 public class Sidebar extends JPanel {
     private final List<JButton> navButtons = new ArrayList<>();
     private Consumer<String> onNavigate;

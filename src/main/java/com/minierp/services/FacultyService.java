@@ -11,6 +11,7 @@ public class FacultyService {
     public Faculty getById(int id) { return dao.findById(id); }
 
     public boolean addFaculty(Faculty f, String username, String password) {
+<<<<<<< HEAD
         if (!AuthService.getInstance().isAdmin()) throw new SecurityException("Admin only");
         return dao.insert(f, username, password) > 0;
     }
@@ -19,5 +20,11 @@ public class FacultyService {
         if (!AuthService.getInstance().isAdmin()) throw new SecurityException("Admin only");
         return dao.update(f) > 0; 
     }
+=======
+        return dao.insert(f, username, password) > 0;
+    }
+
+    public boolean updateFaculty(Faculty f) { return dao.update(f) > 0; }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
     public int getTotalCount() { return dao.count(); }
 }

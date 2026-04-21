@@ -1,5 +1,6 @@
 package com.minierp.services;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,15 @@ import com.minierp.dao.StudentDAO;
 import com.minierp.database.QueryExecutor;
 import com.minierp.models.Faculty;
 import com.minierp.models.Student;
+=======
+import com.minierp.database.QueryExecutor;
+import com.minierp.models.Faculty;
+import com.minierp.models.Student;
+import com.minierp.dao.StudentDAO;
+import com.minierp.dao.FacultyDAO;
+import java.util.List;
+import java.util.Map;
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
 public class AuthService {
     private static AuthService instance;
@@ -35,12 +45,15 @@ public class AuthService {
         currentUserId = ((Number) row.get("id")).intValue();
         currentRole = row.get("role").toString();
         currentUsername = username;
+<<<<<<< HEAD
         /// ///////////////////////////////////////ADMIN LOGIN
         if ("admin".equals(username) && "admin123".equals(password)) {
             this.currentUsername = "System Admin";
             this.currentRole = "ADMIN";
             return true;
         }//////////////////////////////////////////////
+=======
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         if ("STUDENT".equals(currentRole)) {
             currentStudent = studentDAO.findByUserId(currentUserId);
         } else if ("FACULTY".equals(currentRole) || "ADMIN".equals(currentRole)) {
@@ -62,6 +75,7 @@ public class AuthService {
     public String getCurrentUsername() { return currentUsername; }
     public Student getCurrentStudent() { return currentStudent; }
     public Faculty getCurrentFaculty() { return currentFaculty; }
+<<<<<<< HEAD
 
     public String getCurrentEmail() {
         if ("FACULTY".equals(currentRole) && currentFaculty != null) return currentFaculty.getEmail();
@@ -74,4 +88,9 @@ public class AuthService {
     public boolean isFaculty() { return "FACULTY".equals(currentRole); }
     public boolean isAdmin() { return "ADMIN".equals(currentRole); }
 
+=======
+    public boolean isLoggedIn() { return currentRole != null; }
+    public boolean isStudent() { return "STUDENT".equals(currentRole); }
+    public boolean isFaculty() { return "FACULTY".equals(currentRole) || "ADMIN".equals(currentRole); }
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 }

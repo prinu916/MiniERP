@@ -56,6 +56,7 @@ public class NotificationPanel extends JPanel {
 
     private void loadData() {
         model.setRowCount(0);
+<<<<<<< HEAD
         AuthService auth = AuthService.getInstance();
         List<Notification> list;
         if (com.minierp.ui.components.UIUtils.isAdmin()) {
@@ -66,6 +67,9 @@ public class NotificationPanel extends JPanel {
                 .filter(n -> n.getSentBy() == userId || "FACULTY".equals(n.getTargetRole()))
                 .collect(java.util.stream.Collectors.toList());
         }
+=======
+        List<Notification> list = service.getAll();
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
         for (Notification n : list) {
             model.addRow(new Object[]{n.getId(), n.getTitle(), n.getType(), n.getTargetRole(),
                 n.getMessage(), n.getCreatedAt(), n.isRead() ? "Yes" : "No"});
@@ -105,7 +109,11 @@ public class NotificationPanel extends JPanel {
         JTextArea msgArea = new JTextArea(4, 30);
         msgArea.setBackground(UITheme.BG_CARD); msgArea.setForeground(UITheme.TEXT_PRIMARY); msgArea.setFont(UITheme.FONT_BODY);
         JComboBox<String> typeCombo = UITheme.makeCombo(new String[]{"INFO", "WARNING", "URGENT"});
+<<<<<<< HEAD
         JComboBox<String> targetCombo = UITheme.makeCombo(new String[]{"ALL", "ADMIN", "STUDENT", "FACULTY"});
+=======
+        JComboBox<String> targetCombo = UITheme.makeCombo(new String[]{"ALL", "STUDENT", "FACULTY"});
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 
         panel.add(UITheme.makeLabel("Title*", UITheme.FONT_BODY, UITheme.TEXT_MUTED));
         panel.add(titleField);

@@ -2,7 +2,11 @@ package com.minierp.ai;
 
 import com.minierp.database.QueryExecutor;
 import com.minierp.models.Timetable;
+<<<<<<< HEAD
 
+=======
+import com.minierp.config.Constants;
+>>>>>>> 5174977120bda675bfdcbe4c15dac73ac972c0cb
 import java.util.*;
 
 public class TimetableGeneratorAI {
