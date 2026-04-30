@@ -104,4 +104,4 @@ Demo data is seeded automatically including courses, subjects, students, faculty
 - FlatLaf requires Java 11+; tested with OpenJDK 11, 17, 21
 =======
 # MiniERP
->>>>>>> f34b075d07d2e9a8f8535080ebac6d42d167a52c
+
