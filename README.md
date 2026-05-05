@@ -102,6 +102,7 @@ Demo data is seeded automatically including courses, subjects, students, faculty
 - On first run the database is created automatically — no manual setup needed
 - The database file is stored next to the JAR: `resources/database/erp.db`
 - FlatLaf requires Java 11+; tested with OpenJDK 11, 17, 21
-=======
+
+- 
 # MiniERP
 
